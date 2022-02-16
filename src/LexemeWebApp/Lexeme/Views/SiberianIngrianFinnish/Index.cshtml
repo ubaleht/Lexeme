@@ -1,8 +1,17 @@
-﻿
+﻿@using Lexeme.Models
+@model WordViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Siberian Ingrian Finnish words";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div style="font-family:Arial">
+    <h2>Index</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.ListBoxFor(m => m.SelectedWordText, Model.Words, new { size = 5 })
+        <br />
+        <input type="submit" value="Submit" />
+    }
+</div>
 
