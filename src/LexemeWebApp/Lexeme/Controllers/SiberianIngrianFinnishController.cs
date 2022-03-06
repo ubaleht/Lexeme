@@ -10,6 +10,29 @@ namespace Lexeme.Controllers
 {
     public class SiberianIngrianFinnishController : Controller
     {
+        public WordViewModel wordViewModel;
+        public List<SelectListItem> listSelectListItems;
+
+        public SiberianIngrianFinnishController()
+        {
+            wordViewModel = new WordViewModel();
+            listSelectListItems = new List<SelectListItem>();
+            List<Word> words = new WordDal().GetWordList();
+
+            foreach (Word word in words)
+            {
+                SelectListItem selectList = new SelectListItem()
+                {
+                    Text = word.WordText,
+                    Value = word.Id.ToString(),
+                    Selected = false
+                };
+                listSelectListItems.Add(selectList);
+            }
+
+            wordViewModel.Words = listSelectListItems;
+        }
+
         // GET: SiberianIngrianFinnish
         /*public ActionResult Index()
         {
@@ -21,9 +44,7 @@ namespace Lexeme.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            WordViewModel wordViewModel = new WordViewModel();
-            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
-            List<Word> words = new WordDal().GetWordList();
+            
 
             /*if (wordViewModel.SelectedWordText != null)
             {
@@ -35,37 +56,27 @@ namespace Lexeme.Controllers
                 }
             }*/
 
-            foreach (Word word in words)
-            {
-                SelectListItem selectList = new SelectListItem()
-                {
-                    Text = word.WordText,
-                    Value = word.Id.ToString(),
-                    Selected = true
-                };
-                listSelectListItems.Add(selectList);
-            }
-
-            wordViewModel.Words = listSelectListItems;
+            
 
             return View(wordViewModel);
         }
 
         [HttpPost]
-        public string Index(IEnumerable<string> selectedWordText)
+        public ActionResult Index(IEnumerable<string> selectedWordText)
         {
+            //wordViewModel.Words = listSelectListItems;
             if (selectedWordText == null)
             {
-                return "No cities are selected";
+                ViewBag.Message = "No cities are selected";
             }
             else
             {
                 //StringBuilder sb = new StringBuilder();
                 //sb.Append("You selected – " + string.Join(",", selectedCities));
-                return selectedWordText.SingleOrDefault();
+                ViewBag.Message = selectedWordText.SingleOrDefault();
             }
-        }
 
-
+            return View(wordViewModel);
         }
+    }
 }
