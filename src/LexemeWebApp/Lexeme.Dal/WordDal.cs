@@ -67,7 +67,7 @@ namespace Lexeme.Dal
                                     IdSpeakerSpeech = reader.GetInt32(reader.GetOrdinal("IdSpeakerSpeech")),
                                     Start = reader.GetInt32(reader.GetOrdinal("Start")),
                                     Finish = reader.GetInt32(reader.GetOrdinal("Finish")),
-                                    WordText = reader.GetString(reader.GetOrdinal("Word")),
+                                    WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
                                     WordEnTranslation = reader.GetString(reader.GetOrdinal("WordEnTranslation")),
                                     WordRuTranslation = reader.GetString(reader.GetOrdinal("WordRuTranslation")),
                                     PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
@@ -79,6 +79,17 @@ namespace Lexeme.Dal
                 }
             }
             return wordList;
+        }
+
+        private string FirstLatterToUppercase(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            char[] a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
         }
     }
 }

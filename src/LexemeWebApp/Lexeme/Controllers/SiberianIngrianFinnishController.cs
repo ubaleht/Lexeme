@@ -67,13 +67,13 @@ namespace Lexeme.Controllers
             //wordViewModel.Words = listSelectListItems;
             if (selectedWordText == null)
             {
-                ViewBag.Message = "No cities are selected";
+                ViewBag.Message = "No words are selected";
             }
             else
             {
                 //StringBuilder sb = new StringBuilder();
                 //sb.Append("You selected – " + string.Join(",", selectedCities));
-                ViewBag.Message = selectedWordText.SingleOrDefault();
+                ViewBag.Message = selectedWordText.ToArray()[0];
             }
 
             return View(wordViewModel);
