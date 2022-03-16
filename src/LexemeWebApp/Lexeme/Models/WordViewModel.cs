@@ -32,8 +32,8 @@ namespace Lexeme.Models
             int id = Convert.ToInt32(strId);
             WordDal wordDal = new WordDal();
             WordsText = wordDal.GetWordById(id).WordText;
-            Start = (int)Math.Ceiling(Convert.ToDecimal(wordDal.GetWordById(id).Start/1000));
-            Finish = (int)Math.Ceiling(Convert.ToDecimal(wordDal.GetWordById(id).Finish/1000 + 1));
+            Start = (wordDal.GetWordById(id).Start % 1000 <= 850)? wordDal.GetWordById(id).Start / 1000 : (wordDal.GetWordById(id).Start / 1000) + 1;
+            Finish = (wordDal.GetWordById(id).Finish % 1000 >= 150)? (wordDal.GetWordById(id).Finish / 1000) + 1 : wordDal.GetWordById(id).Finish / 1000;
             SpeakerEnTranslate = wordDal.GetWordById(id).WordEnTranslation;
             SpeakerRuTranslate = wordDal.GetWordById(id).WordRuTranslation;
             SpeakerMorph = (wordDal.GetWordById(id).PartOfSpeech != String.Empty)? wordDal.GetWordById(id).PartOfSpeech : "None";
