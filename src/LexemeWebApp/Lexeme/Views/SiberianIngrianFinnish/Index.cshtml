@@ -15,6 +15,7 @@
                     {
                         @Html.ListBoxFor(m => m.SelectedWordText, Model.Words, new { size = 16 })
                         <br />
+                        <br />
                         <input type="submit" value=" See Info " />
                     }
                 </div>
@@ -29,16 +30,17 @@
                         <b>Translation in Russian:</b> @Model.SpeakerRuTranslate<br />
                         <b>Morphology:</b> @Model.SpeakerMorph<br />
                         <b>Comments:</b> @Model.SpeakerComments<br />
-                        <b>Speaker Info:</b> Code: KKM-34, Year of birth: 1934, Male, Current place of residence: Ryzhkovo, Place of the birth: Ryzhkovo, Birthplace of parents: both parents Ryzhkovo<br />
+                        <b>Speaker Info:</b> @Model.SpeakerPersonalInfo<br />
                         <b>Interviwer:</b> Ivan Ubaleht<br />
-                        <b>Place, Date:</b> Ryzhkovo, 23.06.2019
+                        <b>Place, Date:</b> @Model.RecContext
                     </p><br />
                     <audio id="myAudio">
-                        <source src="/Content/KKM-34-003.WAV#t=@Model.Start.ToString(),@Model.Finish.ToString()" type="audio/wav">
+                        <source src="/Content/@Model.AudioFileName#t=@Model.Start.ToString(),@Model.Finish.ToString()" type="audio/wav">
                         Your browser does not support the audio element.
                     </audio>
                     <p></p>
                     <p>
+                        <br />
                         <button onclick="playAudio()" id="playButton" type="button">Play Audio</button><br />
                         <div id="label1">Click the button to play the audio.</div><div id="label2" hidden>Click the button "See Info" to play the audio again.</div>
                     </p>

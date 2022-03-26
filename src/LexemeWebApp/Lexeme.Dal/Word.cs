@@ -17,6 +17,7 @@ namespace Lexeme.Dal
         public string WordRuTranslation { get; set; }
         public string PartOfSpeech { get; set; }
         public string WordComments { get; set; }
+        public string SpeakerCode { get; set; }
         public Word() { }
     }
 }

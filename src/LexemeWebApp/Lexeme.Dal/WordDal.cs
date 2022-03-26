@@ -16,11 +16,27 @@ namespace Lexeme.Dal
 
         public Word GetWordById(int id)
         {
+            string speakerCode = string.Empty;
+
             using (var conn = new SqlConnection(connectionString))
             {
                 using (var cmd = conn.CreateCommand())
                 {
                     conn.Open();
+
+                    cmd.CommandText = "select SpeakerPersonalCode from SpeakerSpeech, Word where Word.IdSpeakerSpeech = SpeakerSpeech.Id and Word.Id = @id2";
+                    cmd.Parameters.AddWithValue("@id2", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            return null;
+                        }
+
+                        speakerCode = reader.GetString(reader.GetOrdinal("SpeakerPersonalCode"));
+                        
+                    }
+
                     cmd.CommandText = "SELECT Id, IdSpeakerSpeech, Start, Finish, Word, WordEnTranslation, WordRuTranslation, PartOfSpeech, WordComments FROM Word WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     using (var reader = cmd.ExecuteReader())
@@ -39,7 +55,8 @@ namespace Lexeme.Dal
                             WordEnTranslation = reader.GetString(reader.GetOrdinal("WordEnTranslation")),
                             WordRuTranslation = reader.GetString(reader.GetOrdinal("WordRuTranslation")),
                             PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
-                            WordComments = reader.GetString(reader.GetOrdinal("WordComments"))
+                            WordComments = reader.GetString(reader.GetOrdinal("WordComments")),
+                            SpeakerCode = speakerCode
                         };
                     }
                 }
