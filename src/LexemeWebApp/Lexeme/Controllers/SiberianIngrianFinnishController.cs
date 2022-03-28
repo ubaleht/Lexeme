@@ -78,5 +78,13 @@ namespace Lexeme.Controllers
 
             return View(wordViewModel);
         }
+
+        [HttpGet]
+        public ActionResult Context(string word)
+        {
+            ViewBag.Message = word;
+
+            return View();
+        }
     }
 }

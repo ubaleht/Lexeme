@@ -127,6 +127,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FragmentViewModel.cs" />
     <Compile Include="Models\WordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <Content Include="Views\SiberianIngrianFinnish\Index.cshtml" />
     <Content Include="Views\SiberianTatar\Index.cshtml" />
     <Content Include="Views\DialectsOfSiberianEstonians\Index.cshtml" />
+    <Content Include="Views\SiberianIngrianFinnish\Context.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

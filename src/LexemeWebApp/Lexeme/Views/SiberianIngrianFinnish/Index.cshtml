@@ -24,23 +24,24 @@
                 @if (ViewBag.Message != null)
                 {
                     Model.GetWordById(@ViewBag.Message);
-                    <p>
-                        <b>Selected word:</b> @Model.WordsText<br />
-                        <b>Translation in English:</b> @Model.SpeakerEnTranslate<br />
-                        <b>Translation in Russian:</b> @Model.SpeakerRuTranslate<br />
-                        <b>Morphology:</b> @Model.SpeakerMorph<br />
-                        <b>Comments:</b> @Model.SpeakerComments<br />
-                        <b>Speaker Info:</b> @Model.SpeakerPersonalInfo<br />
-                        <b>Interviwer:</b> Ivan Ubaleht<br />
-                        <b>Place, Date:</b> @Model.RecContext
-                    </p><br />
+                <p>
+                    <b>Selected word:</b> @Model.WordsText<br />
+                    <b>Translation in English:</b> @Model.SpeakerEnTranslate<br />
+                    <b>Translation in Russian:</b> @Model.SpeakerRuTranslate<br />
+                    <b>Morphology:</b> @Model.SpeakerMorph<br />
+                    <b>Comments:</b> @Model.SpeakerComments<br />
+                    <b>Speaker Info:</b> @Model.SpeakerPersonalInfo<br />
+                    <b>Interviwer:</b> Ivan Ubaleht<br />
+                    <b>Place, Date:</b> @Model.RecContext<br />
+                    <br />
+                    <b>Get the word's context:</b> @Html.ActionLink("Get context", "Context", "SiberianIngrianFinnish", new { word = @ViewBag.Message }, htmlAttributes: null)
+                </p><br />
                     <audio id="myAudio">
                         <source src="/Content/@Model.AudioFileName#t=@Model.Start.ToString(),@Model.Finish.ToString()" type="audio/wav">
                         Your browser does not support the audio element.
                     </audio>
                     <p></p>
                     <p>
-                        <br />
                         <button onclick="playAudio()" id="playButton" type="button">Play Audio</button><br />
                         <div id="label1">Click the button to play the audio.</div><div id="label2" hidden>Click the button "See Info" to play the audio again.</div>
                     </p>
