@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Fragment.cs" />
     <Compile Include="FragmentDal.cs" />
+    <Compile Include="InterviewerSpeech.cs" />
+    <Compile Include="SpeakerSpeech.cs" />
     <Compile Include="Word.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WordDal.cs" />

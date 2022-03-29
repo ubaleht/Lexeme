@@ -8,5 +8,13 @@ namespace Lexeme.Dal
 {
     public class Fragment
     {
+        public int Id { get; set; }
+        public int Start { get; set; }
+        public int Finish { get; set; }
+        public string FragmentName { get; set; }
+        public List<SpeakerSpeech> SpeakerSpeechList { get; set; }
+        public List<InterviewerSpeech> InterviewerSpeechList { get; set; }
+
+        public Fragment() { }
     }
 }
