@@ -8,5 +8,13 @@ namespace Lexeme.Dal
 {
     public class InterviewerSpeech
     {
+        public int Id { get; set; }
+        public int Start { get; set; }
+        public int Finish { get; set; }
+        public string InterviewerSpeechText { get; set; }
+        public string InterviewerSpeechEnTranslation { get; set; }
+
+        public InterviewerSpeech()
+        { }
     }
 }
