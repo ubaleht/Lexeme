@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace Lexeme.Dal
@@ -85,8 +84,8 @@ namespace Lexeme.Dal
                                     Start = reader.GetInt32(reader.GetOrdinal("Start")),
                                     Finish = reader.GetInt32(reader.GetOrdinal("Finish")),
                                     WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
-                                    WordEnTranslation = reader.GetString(reader.GetOrdinal("WordEnTranslation")),
-                                    WordRuTranslation = reader.GetString(reader.GetOrdinal("WordRuTranslation")),
+                                    WordEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordEnTranslation"))),
+                                    WordRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordRuTranslation"))),
                                     PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
                                     WordComments = reader.GetString(reader.GetOrdinal("WordComments"))
                                 }
@@ -98,6 +97,7 @@ namespace Lexeme.Dal
             return wordList;
         }
 
+        //TODO: Move to helper class
         private string FirstLatterToUppercase(string s)
         {
             if (string.IsNullOrEmpty(s))
