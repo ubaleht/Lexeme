@@ -14,6 +14,7 @@ namespace Lexeme.Dal
         public string FragmentName { get; set; }
         public List<SpeakerSpeech> SpeakerSpeechList { get; set; }
         public List<InterviewerSpeech> InterviewerSpeechList { get; set; }
+        public string FileName { get; set; }
 
         public Fragment() { }
     }

@@ -14,6 +14,7 @@ namespace Lexeme.Dal
         private int generalFragmentId = 0;
         private int generalFragmentStart = 0;
         private int generalFragmentFinish = 0;
+        private string generalFragmentFileName = string.Empty;
         private List<SpeakerSpeech> speakerSpeechList = new List<SpeakerSpeech>();
         private List<InterviewerSpeech> interviewerSpeechList = new List<InterviewerSpeech>();
 
@@ -23,10 +24,11 @@ namespace Lexeme.Dal
         {
             using (var conn = new SqlConnection(connectionString))
             {
+                
                 using (var cmd = conn.CreateCommand())
                 {
                     conn.Open();
-                    cmd.CommandText = "select GeneralFragment.Id, GeneralFragment.Start, GeneralFragment.Finish from GeneralFragment, SpeakerSpeech, Word " +
+                    cmd.CommandText = "select GeneralFragment.Id, GeneralFragment.Start, GeneralFragment.Finish, GeneralFragment.FileNameFieldWorkFile from GeneralFragment, SpeakerSpeech, Word " +
                                       "where Word.Id = @wordId and Word.IdSpeakerSpeech = SpeakerSpeech.Id and GeneralFragment.Id = SpeakerSpeech.IdGeneralFragment";
                     cmd.Parameters.AddWithValue("@wordId", wordId);
                     using (var reader = cmd.ExecuteReader())
@@ -35,12 +37,13 @@ namespace Lexeme.Dal
                         {
                             return null;
                         }
-                        generalFragmentId = reader.GetInt32(reader.GetOrdinal("GeneralFragment.Id"));
-                        generalFragmentStart = reader.GetInt32(reader.GetOrdinal("GeneralFragment.Start"));
-                        generalFragmentFinish = reader.GetInt32(reader.GetOrdinal("GeneralFragment.Finish"));
+                        generalFragmentId = reader.GetInt32(0);
+                        generalFragmentStart = reader.GetInt32(1);
+                        generalFragmentFinish = reader.GetInt32(2);
+                        generalFragmentFileName = reader.GetString(3);
                     }
 
-                    cmd.CommandText = "select SpeakerSpeech.Speech, SpeakerSpeech.SpeechEnTranslation, SpeakerSpeech.SpeechRuTranslation from SpeakerSpeech join GeneralFragment on GeneralFragment.Id = SpeakerSpeech.IdGeneralFragment where GeneralFragment.Id = @generalFragmentId";
+                    cmd.CommandText = "select Speech, SpeechEnTranslation, SpeechRuTranslation from SpeakerSpeech join GeneralFragment on GeneralFragment.Id = SpeakerSpeech.IdGeneralFragment where GeneralFragment.Id = @generalFragmentId";
                     cmd.Parameters.AddWithValue("@generalFragmentId", generalFragmentId);
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -49,15 +52,15 @@ namespace Lexeme.Dal
                             speakerSpeechList.Add(
                                 new SpeakerSpeech()
                                 {
-                                    SpeakerSpeechText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeakerSpeech.Speech"))),
-                                    SpeakerSpeechEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeakerSpeech.SpeechEnTranslation"))),
-                                    SpeakerSpeechRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeakerSpeech.SpeechRuTranslation")))
+                                    SpeakerSpeechText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Speech"))),
+                                    SpeakerSpeechEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeechEnTranslation"))),
+                                    SpeakerSpeechRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeechRuTranslation")))
                                 }
                             );
                         }
                     }
 
-                    cmd.CommandText = "select InterviewerSpeech.InterviewerSpeech, InterviewerSpeech.InterviewerSpeechEnTranslation from InterviewerSpeech join GeneralFragment on GeneralFragment.Id = InterviewerSpeech.IdGeneralFragment where GeneralFragment.Id = @generalFragmentId2";
+                    cmd.CommandText = "select InterviewerSpeech, InterviewerSpeechEnTranslation from InterviewerSpeech join GeneralFragment on GeneralFragment.Id = InterviewerSpeech.IdGeneralFragment where GeneralFragment.Id = @generalFragmentId2";
                     cmd.Parameters.AddWithValue("@generalFragmentId2", generalFragmentId);
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -66,8 +69,8 @@ namespace Lexeme.Dal
                             interviewerSpeechList.Add(
                                 new InterviewerSpeech()
                                 {
-                                    InterviewerSpeechText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("InterviewerSpeech.InterviewerSpeech"))),
-                                    InterviewerSpeechEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("SpeakerSpeech.SpeechEnTranslation")))
+                                    InterviewerSpeechText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("InterviewerSpeech"))),
+                                    InterviewerSpeechEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("InterviewerSpeechEnTranslation")))
                                 }
                             );
                         }
@@ -80,7 +83,8 @@ namespace Lexeme.Dal
                 Start = generalFragmentStart,
                 Finish = generalFragmentFinish,
                 SpeakerSpeechList = speakerSpeechList,
-                InterviewerSpeechList = interviewerSpeechList
+                InterviewerSpeechList = interviewerSpeechList,
+                FileName = generalFragmentFileName
             };
             
         }

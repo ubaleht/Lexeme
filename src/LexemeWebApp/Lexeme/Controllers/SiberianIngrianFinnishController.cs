@@ -13,6 +13,8 @@ namespace Lexeme.Controllers
         public WordViewModel wordViewModel;
         public List<SelectListItem> listSelectListItems;
 
+        public FragmentViewModel fragmentViewModel;
+
         public SiberianIngrianFinnishController()
         {
             wordViewModel = new WordViewModel();
@@ -31,6 +33,8 @@ namespace Lexeme.Controllers
             }
 
             wordViewModel.Words = listSelectListItems;
+
+            fragmentViewModel = new FragmentViewModel();
         }
 
         // GET: SiberianIngrianFinnish
@@ -84,7 +88,7 @@ namespace Lexeme.Controllers
         {
             ViewBag.Message = word;
 
-            return View();
+            return View(fragmentViewModel);
         }
     }
 }
