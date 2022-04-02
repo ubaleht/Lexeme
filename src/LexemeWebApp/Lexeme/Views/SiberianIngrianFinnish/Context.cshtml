@@ -1,25 +1,46 @@
 ﻿@using Lexeme.Models
 @model FragmentViewModel
 @{
-    ViewBag.Title = "Context";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Context";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<h4>Context</h4><br />
+<h4>Word context</h4><br />
 
 <!--<p>@Html.ActionLink("Back", "Index", "SiberianIngrianFinnish")</p>-->
 
 @if (ViewBag.Message != null)
 {
     Model.GetFragmentByWordId(@ViewBag.Message);
-<p>
-    <b>Start:</b> @Model.Start<br />
-    <b>Finish:</b> @Model.Finish<br />
-    <b>File Name:</b> @Model.FileName<br />
-    <b>Speaker Speech:</b> @Model.SpeakerSpeechesByFragment<br />
-    <b>Interviewer:</b> @Model.InterviewerSpeechesByFragment<br />
-</p>
+    <p>
+        <b>Speaker's speech:</b> @Model.SpeakerSpeechesByFragment<br />
+        <b>Translation into English of the speaker's speech:</b> @Model.SpeakerSpeechesByFragmentEnTranslation<br />
+        <!--<b>Speaker Speech, Translate to Russian:</b> @Model.SpeakerSpeechesByFragmentRuTranslation<br />-->
+        <b>Interviewer's speech:</b> @Model.InterviewerSpeechesByFragment<br />
+        <b>Translation into English of the interviewer's speech:</b> @Model.InterviewerSpeechesByFragmentEnTranslation<br />
+        <b>Audio file Name:</b> @Model.FileName<br />
+        <b>Fragment start time (in seconds):</b> @Model.Start<br />
+        <b>Fragment end time (in seconds):</b> @Model.Finish<br />
+        <audio id="myAudio">
+            <source src="/Content/@Model.FileName#t=@Model.Start.ToString(),@Model.Finish.ToString()" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+        <br />
+        <p>
+            <button onclick="playAudio()" id="playButton" type="button">Play Audio</button><br />
+        </p>
+    </p> 
+        <script>
+            var x = document.getElementById("myAudio");
+            var playButton = document.getElementById("playButton");
+
+            function playAudio() {
+                x.play();
+                playButton.disabled = true;
+            }
+
+        </script>
 }
 
 <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>

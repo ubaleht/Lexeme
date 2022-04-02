@@ -50,11 +50,11 @@ namespace Lexeme.Dal
                             IdSpeakerSpeech = reader.GetInt32(reader.GetOrdinal("IdSpeakerSpeech")),
                             Start = reader.GetInt32(reader.GetOrdinal("Start")),
                             Finish = reader.GetInt32(reader.GetOrdinal("Finish")),
-                            WordText = reader.GetString(reader.GetOrdinal("Word")),
-                            WordEnTranslation = reader.GetString(reader.GetOrdinal("WordEnTranslation")),
-                            WordRuTranslation = reader.GetString(reader.GetOrdinal("WordRuTranslation")),
-                            PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
-                            WordComments = reader.GetString(reader.GetOrdinal("WordComments")),
+                            WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
+                            WordEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordEnTranslation"))),
+                            WordRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordRuTranslation"))),
+                            PartOfSpeech = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("PartOfSpeech"))),
+                            WordComments = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordComments"))),
                             SpeakerCode = speakerCode
                         };
                     }
