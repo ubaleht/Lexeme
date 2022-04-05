@@ -22,3 +22,42 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.footer-container {
+    position: relative;
+    left: 0px;
+}
+
+.footer-img-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.footer-text-container {
+    position: absolute;
+    top: 2px;
+    left: 25px;
+}
+
+.footer-img {
+    border: 1px solid #f1ecec;
+}
+
+.footer-img-container .tooltiptext {
+    visibility: hidden;
+    width: 53px;
+    background-color: white;
+    color: #808080;
+    text-align: center;
+    padding: 3px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    font-size: 12px;
+    left: 0px;
+}
+
+.footer-img-container:hover .tooltiptext {
+    visibility: visible;
+}
