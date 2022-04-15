@@ -3,12 +3,12 @@ Lexeme is a system for managing speech corpora for endangered languages. This sy
 
 This repository contains the source code of the website for the Lexeme project. 
 
-The lex system currently uses the following endangered languages:
+At this moment, The lexeme system uses the following endangered languages:
 
 - Siberian Ingrian Finnish: https://github.com/ubaleht/SiberianIngrianFinnish
 
 - Siberian Tatar: https://github.com/ubaleht/SiberianTatar
 
-- Dialects of Siberian Estonians https://github.com/ubaleht/DialectsOfSiberianEstonians
+- The dialects of the Siberian Estonians: https://github.com/ubaleht/DialectsOfSiberianEstonians
 
 
