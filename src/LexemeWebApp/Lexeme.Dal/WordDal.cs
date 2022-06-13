@@ -11,6 +11,8 @@ namespace Lexeme.Dal
     {
         private string connectionString = System.Configuration.ConfigurationSettings.AppSettings["DBConnection"].Replace("\\\\", "\\");
 
+        private string connectionString2 = System.Configuration.ConfigurationSettings.AppSettings["DBConnection2"].Replace("\\\\", "\\");
+
         public WordDal() { }
 
         public Word GetWordById(int id)
@@ -86,6 +88,94 @@ namespace Lexeme.Dal
                                     WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
                                     WordEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordEnTranslation"))),
                                     WordRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordRuTranslation"))),
+                                    PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
+                                    WordComments = reader.GetString(reader.GetOrdinal("WordComments"))
+                                }
+                            );
+                        }
+                    }
+                }
+            }
+            return wordList;
+        }
+
+        public WordSty GetWordByIdSty(int id)
+        {
+            string speakerCode = string.Empty;
+
+            using (var conn = new SqlConnection(connectionString2))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    conn.Open();
+
+                    cmd.CommandText = "select SpeakerPersonalCode from SpeakerSpeech, Word where Word.IdSpeakerSpeech = SpeakerSpeech.Id and Word.Id = @id2";
+                    cmd.Parameters.AddWithValue("@id2", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            return null;
+                        }
+
+                        speakerCode = reader.GetString(reader.GetOrdinal("SpeakerPersonalCode"));
+
+                    }
+
+                    cmd.CommandText = "SELECT Id, IdSpeakerSpeech, Start, Finish, Word, WordEnTranslation, WordRuTranslation, WordTrTranslation, WordLatin, PartOfSpeech, WordComments FROM Word WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            return null;
+                        }
+                        return new WordSty
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            IdSpeakerSpeech = reader.GetInt32(reader.GetOrdinal("IdSpeakerSpeech")),
+                            Start = reader.GetInt32(reader.GetOrdinal("Start")),
+                            Finish = reader.GetInt32(reader.GetOrdinal("Finish")),
+                            WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
+                            WordEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordEnTranslation"))),
+                            WordRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordRuTranslation"))),
+                            WordTrTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordTrTranslation"))),
+                            WordLatin = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordLatin"))),
+                            PartOfSpeech = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("PartOfSpeech"))),
+                            WordComments = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordComments"))),
+                            SpeakerCode = speakerCode
+                        };
+                    }
+                }
+            }
+        }
+
+        public List<WordSty> GetWordListSty()
+        {
+            List<WordSty> wordList = new List<WordSty>();
+
+            using (var conn = new SqlConnection(connectionString2))
+            {
+                using (var cmd = conn.CreateCommand())
+                {
+                    conn.Open();
+                    cmd.CommandText = "SELECT Id, IdSpeakerSpeech, Start, Finish, Word, WordEnTranslation, WordRuTranslation, WordTrTranslation, WordLatin, PartOfSpeech, WordComments FROM Word";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            wordList.Add(
+                                new WordSty()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                    IdSpeakerSpeech = reader.GetInt32(reader.GetOrdinal("IdSpeakerSpeech")),
+                                    Start = reader.GetInt32(reader.GetOrdinal("Start")),
+                                    Finish = reader.GetInt32(reader.GetOrdinal("Finish")),
+                                    WordText = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("Word"))),
+                                    WordEnTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordEnTranslation"))),
+                                    WordRuTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordRuTranslation"))),
+                                    WordTrTranslation = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordTrTranslation"))),
+                                    WordLatin = FirstLatterToUppercase(reader.GetString(reader.GetOrdinal("WordLatin"))),
                                     PartOfSpeech = reader.GetString(reader.GetOrdinal("PartOfSpeech")),
                                     WordComments = reader.GetString(reader.GetOrdinal("WordComments"))
                                 }

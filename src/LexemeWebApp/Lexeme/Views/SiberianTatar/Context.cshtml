@@ -1,0 +1,51 @@
+﻿@using Lexeme.Models
+@model FragmentViewModel
+@{
+                /**/
+
+                ViewBag.Title = "Context";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Word context</h4><br />
+
+<!--<p>@Html.ActionLink("Back", "Index", "SiberianTatar")</p>-->
+
+@if (ViewBag.Message != null)
+{
+    Model.GetFragmentByWordIdSty(@ViewBag.Message);
+    <p>
+        <b>Speaker's speech:</b> @Model.SpeakerSpeechesByFragment<br />
+        <b>Speaker's speech (Common Turkic Alphabet):</b> @Model.SpeakerSpeechesByFragmentLatin<br />
+        <b>Translation into English of the speaker's speech:</b> @Model.SpeakerSpeechesByFragmentEnTranslation<br />
+        <b>Speaker Speech, Translate to Russian:</b> @Model.SpeakerSpeechesByFragmentRuTranslation<br />
+        <b>Speaker Speech, Translate to Turkish:</b> @Model.SpeakerSpeechesByFragmentTrTranslation<br />
+        <b>Interviewer's speech:</b> @Model.InterviewerSpeechesByFragment<br />
+        <b>Translation into English of the interviewer's speech:</b> @Model.InterviewerSpeechesByFragmentEnTranslation<br />
+        <b>Translation into Turkish of the interviewer's speech:</b> @Model.InterviewerSpeechesByFragmentTrTranslation<br />
+        <b>Audio file Name:</b> @Model.FileName<br />
+        <b>Fragment start time (in seconds):</b> @Model.Start<br />
+        <b>Fragment end time (in seconds):</b> @Model.Finish<br />
+        <audio id="myAudio">
+            <source src="/Content/@Model.FileName#t=@Model.Start.ToString(),@Model.Finish.ToString()" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+        <br />
+    <p>
+        <button onclick="playAudio()" id="playButton" type="button">Play Audio</button><br />
+    </p>
+    </p>
+    <script>
+            var x = document.getElementById("myAudio");
+            var playButton = document.getElementById("playButton");
+
+            function playAudio() {
+                x.play();
+                playButton.disabled = true;
+            }
+
+    </script>
+}
+
+<a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+

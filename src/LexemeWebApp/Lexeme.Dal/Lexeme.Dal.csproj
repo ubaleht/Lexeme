@@ -43,11 +43,15 @@
   <ItemGroup>
     <Compile Include="Fragment.cs" />
     <Compile Include="FragmentDal.cs" />
+    <Compile Include="FragmentSty.cs" />
     <Compile Include="InterviewerSpeech.cs" />
+    <Compile Include="InterviewerSpeechSty.cs" />
     <Compile Include="SpeakerSpeech.cs" />
+    <Compile Include="SpeakerSpeechSty.cs" />
     <Compile Include="Word.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WordDal.cs" />
+    <Compile Include="WordSty.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

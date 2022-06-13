@@ -41,7 +41,7 @@ textarea {
 }
 
 .footer-img {
-    border: 1px solid #f1ecec;
+    border: 1px solid #ffffff; /*#f1ecec;*/
 }
 
 .footer-img-container .tooltiptext {

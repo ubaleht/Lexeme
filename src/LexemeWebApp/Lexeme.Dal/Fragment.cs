@@ -12,6 +12,7 @@ namespace Lexeme.Dal
         public int Start { get; set; }
         public int Finish { get; set; }
         public string FragmentName { get; set; }
+        //TODO: Two list fields go to child class
         public List<SpeakerSpeech> SpeakerSpeechList { get; set; }
         public List<InterviewerSpeech> InterviewerSpeechList { get; set; }
         public string FileName { get; set; }

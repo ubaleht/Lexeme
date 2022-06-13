@@ -124,6 +124,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SiberianIngrianFinnishController.cs" />
     <Compile Include="Controllers\SiberianTatarController.cs" />
+    <Compile Include="Controllers\SibTatController.cs" />
     <Compile Include="Controllers\SIFController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -144,6 +145,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -176,9 +178,12 @@
     <Content Include="Views\DialectsOfSiberianEstonians\Index.cshtml" />
     <Content Include="Views\SiberianIngrianFinnish\Context.cshtml" />
     <Content Include="Views\SIF\Index.cshtml" />
+    <Content Include="Views\SiberianTatar\About.cshtml" />
+    <Content Include="Views\SiberianTatar\Context.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SibTat\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
